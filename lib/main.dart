@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:lottie/lottie.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -58,26 +60,25 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Magic_ball'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Lottie.asset('assets/magic_ball.json'),
             ValueListenableBuilder<int>(
               builder: (context, value, _) {
                 return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    list[value],
-                    style: Theme.of(context).textTheme.headlineMedium,
+                  padding: const EdgeInsets.only(bottom: 50.0),
+                  child: InkWell(
+                    onTap: _randomValue,
+                    child: Text(
+                      list[value],
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
                 );
               },
               valueListenable: indexNotifier,
             ),
-            FloatingActionButton(
-              onPressed: _randomValue,
-              tooltip: 'again',
-              child: const Icon(Icons.replay),
-            )
           ],
         ),
       ),
