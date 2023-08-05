@@ -37,6 +37,7 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
   final luckNotifier = ValueNotifier('');
 
   late final AnimationController magicController;
+  late final Animation<double> textScale;
 
   @override
   void initState() {
@@ -48,6 +49,11 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
     );
 
     magicController.addStatusListener(onStatusListener);
+
+    textScale = CurvedAnimation(
+      parent: magicController,
+      curve: Curves.easeOutQuad,
+    );
   }
 
   void onStatusListener(status) async {
@@ -104,10 +110,14 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
                 ValueListenableBuilder<String>(
                   builder: (context, value, _) => Padding(
                     padding: const EdgeInsets.only(bottom: 80.0),
-                    child: Text(
-                      value,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: colorScheme.primary,
+                    child: ScaleTransition(
+                      scale: textScale,
+                      alignment: Alignment.center,
+                      child: Text(
+                        value,
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: colorScheme.primary,
+                        ),
                       ),
                     ),
                   ),
