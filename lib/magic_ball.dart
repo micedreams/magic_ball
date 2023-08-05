@@ -4,10 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 final list = [
-  'yes',
-  'no',
-  'maybe',
-  'ask agian',
+  "It is certain",
+  "It is decidedly so",
+  "Without a doubt",
+  "Yes - definitely",
+  "You may rely on it",
+  "As I see it, yes",
+  "Most likely",
+  "Outlook good",
+  "Yes",
+  "Signs point to yes",
+  "Reply hazy, try again",
+  "Ask again later",
+  "Better not tell you now",
+  "Cannot predict now",
+  "Concentrate and ask again",
+  "Don't count on it",
+  "My reply is no",
+  "My sources say no",
+  "Outlook not so good",
+  "Very doubtful"
 ];
 
 class MagicBall extends StatefulWidget {
@@ -26,26 +42,34 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    magicController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    magicController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    );
 
-    magicController.addStatusListener((status) async {
-      if (status == AnimationStatus.completed) {
-        magicController.reset();
-        Future.delayed(const Duration(milliseconds: 500), () {
-          luckNotifier.value = '';
-        });
-      }
-    });
+    magicController.addStatusListener(onStatusListener);
   }
 
-  void randomValue() {
+  void onStatusListener(status) async {
+    if (status != AnimationStatus.completed) {
+      return;
+    }
+
+    magicController.reset();
+
+    Future.delayed(
+      const Duration(seconds: 2),
+      () => luckNotifier.value = '',
+    );
+  }
+
+  void setValue() {
     magicController.forward();
 
     final rng = Random();
     final randomNum = rng.nextInt(list.length);
     if (list[randomNum] == luckNotifier.value) {
-      randomValue();
+      setValue();
     } else {
       luckNotifier.value = list[randomNum];
     }
@@ -67,7 +91,7 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
           child: InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            onTap: randomValue,
+            onTap: setValue,
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: [
