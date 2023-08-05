@@ -55,10 +55,10 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
       return;
     }
 
-    magicController.reset();
+    magicController.reverse();
 
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 2, milliseconds: 30),
       () => luckNotifier.value = '',
     );
   }
