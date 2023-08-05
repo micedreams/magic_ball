@@ -32,6 +32,9 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
     magicController.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         magicController.reset();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          luckNotifier.value = '';
+        });
       }
     });
   }
