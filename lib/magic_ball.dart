@@ -39,7 +39,8 @@ class _MagicBallState extends State<MagicBall> {
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              Lottie.asset('assets/magic_ball.json'),
+              Lottie.asset('assets/magic_ball.json',repeat:false),
+              Lottie.asset('assets/candle.json'),
               ValueListenableBuilder<int>(
                 builder: (context, value, _) {
                   return Padding(
