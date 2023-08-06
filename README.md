@@ -2,4 +2,4 @@
 
 Ask a question and tap the magic ball.
 
-Try this out: [link](https://micedreams.github.io/MagicBall/#/)
+Try it out: [link](https://micedreams.github.io/magic_ball/#/)
