@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'magic_ball.dart';
 
@@ -11,10 +10,7 @@ class Main extends StatelessWidget {
   const Main({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(360, 690));
-
-    return MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xffFDBE50),
@@ -24,5 +20,4 @@ class Main extends StatelessWidget {
       ),
       home: const Scaffold(body: MagicBall()),
     );
-  }
 }

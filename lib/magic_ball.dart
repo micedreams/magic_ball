@@ -87,48 +87,58 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Ask a question and tap the magic ball',
-            style: TextStyle(color: colorScheme.inversePrimary),
-          ),
-          InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: setValue,
-            child: Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Lottie.asset(
-                  'assets/magic_ball.json',
-                  repeat: false,
-                  controller: magicController,
-                ),
-                Lottie.asset('assets/candle.json'),
-                ValueListenableBuilder<String>(
-                  builder: (context, value, _) => Padding(
-                    padding: EdgeInsets.only(bottom: 80.h),
-                    child: ScaleTransition(
-                      scale: textScale,
-                      alignment: Alignment.center,
-                      child: Text(
-                        value,
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: colorScheme.primary,
+    return OrientationBuilder(builder: (context, orientation) {
+      ScreenUtil.init(
+        context,
+        designSize: orientation == Orientation.landscape
+            ? const Size(360, 690)
+            : const Size(690, 360),
+      );
+
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Ask a question and tap the magic ball',
+              style: TextStyle(color: colorScheme.inversePrimary),
+            ),
+            InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: setValue,
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Lottie.asset(
+                    'assets/magic_ball.json',
+                    repeat: false,
+                    controller: magicController,
+                  ),
+                  Lottie.asset('assets/candle.json'),
+                  ValueListenableBuilder<String>(
+                    builder: (context, value, _) => Padding(
+                      padding: EdgeInsets.only(bottom: 80.h),
+                      child: ScaleTransition(
+                        scale: textScale,
+                        alignment: Alignment.center,
+                        child: Text(
+                          value,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: colorScheme.primary,
+                          ),
                         ),
                       ),
                     ),
+                    valueListenable: luckNotifier,
                   ),
-                  valueListenable: luckNotifier,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
