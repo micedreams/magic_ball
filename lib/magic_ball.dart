@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final list = [
   "It is certain",
@@ -86,15 +87,15 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Ask a question and tap the magic ball',
-          style: TextStyle(color: colorScheme.inversePrimary),
-        ),
-        Center(
-          child: InkWell(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Ask a question and tap the magic ball',
+            style: TextStyle(color: colorScheme.inversePrimary),
+          ),
+          InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: setValue,
@@ -109,7 +110,7 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
                 Lottie.asset('assets/candle.json'),
                 ValueListenableBuilder<String>(
                   builder: (context, value, _) => Padding(
-                    padding: const EdgeInsets.only(bottom: 80.0),
+                    padding: EdgeInsets.only(bottom: 80.h),
                     child: ScaleTransition(
                       scale: textScale,
                       alignment: Alignment.center,
@@ -126,8 +127,8 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
