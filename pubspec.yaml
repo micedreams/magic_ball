@@ -31,7 +31,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_screenutil: ^5.8.4
   lottie: ^2.5.0
 
 dev_dependencies:
