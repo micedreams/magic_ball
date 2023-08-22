@@ -11,13 +11,13 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xffFDBE50),
-          background: Colors.black,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xffFDBE50),
+            background: Colors.black,
+          ),
+          useMaterial3: true,
         ),
-        useMaterial3: true,
-      ),
-      home: const Scaffold(body: MagicBall()),
-    );
+        home: const Scaffold(body: MagicBall()),
+      );
 }
