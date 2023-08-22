@@ -94,7 +94,7 @@ class _MagicBallState extends State<MagicBall> with TickerProviderStateMixin {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              'Ask a question and tap the magic ball',
+              'Think of a question and tap the magic ball.',
               style: TextStyle(color: colorScheme.inversePrimary),
             ),
             InkWell(
